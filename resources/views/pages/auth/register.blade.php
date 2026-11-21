@@ -7,22 +7,65 @@
 
         <form method="POST" action="{{ route('register.store') }}" class="flex flex-col gap-6">
             @csrf
-            <!-- Name -->
+            <!-- LastName -->
             <flux:input
-                name="name"
-                :label="__('Name')"
+                name="lastname"
+                :label="__('Фамилия')"
                 :value="old('name')"
                 type="text"
                 required
                 autofocus
-                autocomplete="name"
-                :placeholder="__('Full name')"
+                autocomplete="family-name"
+                :placeholder="__('Фамилия')"
+            />
+            <!-- FirstName -->
+            <flux:input
+                name="firstname"
+                :label="__('Имя')"
+                :value="old('name')"
+                type="text"
+                required
+                autofocus
+                autocomplete="given-name"
+                :placeholder="__('Имя')"
+            />
+            <!-- MiddleName -->
+            <flux:input
+                name="middlename"
+                :label="__('Отчетсво')"
+                :value="old('name')"
+                type="text"
+                autofocus
+                autocomplete="additional-name"
+                :placeholder="__('Отчетсво')"
+            />
+            <!-- Tel -->
+            <flux:input
+                name="tel"
+                :label="__('Телефон')"
+                :value="old('name')"
+                type="tel"
+                required
+                autofocus
+                autocomplete="tel"
+                :placeholder="__('Телефон')"
+            />
+            <!-- Login -->
+            <flux:input
+                name="login"
+                :label="__('Логин')"
+                :value="old('name')"
+                type="text"
+                required
+                autofocus
+                autocomplete="username"
+                :placeholder="__('Логин')"
             />
 
             <!-- Email Address -->
             <flux:input
                 name="email"
-                :label="__('Email address')"
+                :label="__('Адрес почты')"
                 :value="old('email')"
                 type="email"
                 required
@@ -33,7 +76,7 @@
             <!-- Password -->
             <flux:input
                 name="password"
-                :label="__('Password')"
+                :label="__('Пароль')"
                 type="password"
                 required
                 autocomplete="new-password"
@@ -45,7 +88,7 @@
             <!-- Confirm Password -->
             <flux:input
                 name="password_confirmation"
-                :label="__('Confirm password')"
+                :label="__('Подтвердите пароль')"
                 type="password"
                 required
                 autocomplete="new-password"
@@ -56,7 +99,7 @@
 
             <div class="flex items-center justify-end">
                 <flux:button type="submit" variant="primary" class="w-full" data-test="register-user-button">
-                    {{ __('Create account') }}
+                    {{ __('Зарегистрироваться') }}
                 </flux:button>
             </div>
         </form>

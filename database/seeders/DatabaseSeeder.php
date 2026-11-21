@@ -9,7 +9,6 @@ use App\Models\Specialization;
 use App\Models\Status;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,18 +19,24 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
 
-        User::create([
-            'login' => 'administrator',
-            'lastname' => 'admin',
-            'firstname' => 'admin',
-            'middlename' => 'admin',
-            'tel' => '8(123)456-78-90',
+        foreach (Status::TITLES as $title) {
+            Status::firstOrCreate(['title' => $title]);
+        }
+    
+        // role не входит в $fillable (защита от mass assignment), поэтому forceFill
+        User::firstOrNew(['login' => 'administrator'])->forceFill([
+            'lastname' => 'Администратор',
+            'firstname' => 'MedLine',
+            'middlename' => 'MedLine',
+            'tel' => '+70000000000',
+            'email' => 'admin@medline.local',
+            'password' => 'administrator',
             'role' => 'admin',
-            'password' => Hash::make('administrator'),
-            'email' => 'admin@example.com',
-        ]);
+            'email_verified_at' => now(),
+        ])->save();
+
+
 
         Payment::create([
             'title' => 'Наличными'
@@ -82,7 +87,7 @@ class DatabaseSeeder extends Seeder
             'title' => 'Приём состоялся'
         ]);
         Status::create([
-            'title' => 'отменена'
+            'title' => 'Отменена'
         ]);
     }
 }
